@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>联系我 - 个人博客</title>
+  <!-- 设置基础URL -->
+  <base href="/exclusive-diary1.github.io/">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 附加少量局部样式以美化联系信息布局 */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .contact-card { padding: 20px; background: var(--card-bg, #182a3c); border-radius: 8px; }
+    body.light-mode .contact-card { background: #fff; }
+    .device-info { font-family: monospace; font-size: 13px; color: #9db0c7; }
+    body.light-mode .device-info { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <aside class="sidebar-container">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="avatar-placeholder"><img src="assets/img/photo.png" alt="用户头像"></div>
+          <span class="user-handle">龙龙龙</span>
+          <p class="tagline">为了梦想而努力，记录每一分一秒!</p>
+        </div>
+        <div class="contact-info">
+          <ul>
+            <li>毕业院校: 某某学院</li>
+            <li>所在城市: 上海</li>
+            <li>工作年限: 1年</li>
+          </ul>
+        </div>
+        <button class="contact-btn">联系</button>
+      </div>
+    </aside>
+
+    <main class="main-content-container">
+      <header class="site-header">
+        <nav class="main-nav">
+          <ul>
+            <li><a href="interface.html">首页</a></li>
+            <li><a href="projects.html">学习笔记展示</a></li>
+            <li><a href="experience.html">经验</a></li>
+            <li class="dropdown"><a href="#">联系▼</a>
+              <div class="dropdown-content"> 
+                <a href="#">基本信息</a>
+                <a href="contact.html">咨询服务</a>
+                <a href="#">技术支持</a>
+                <a href="index.html">退出登录</a>
+              </div>
+            </li> 
+            <li><button id="theme-toggle" class="nav-toggle-btn">切换主题</button></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section class="content-area">
+        <div class="hero-section">
+          <h1>咨询服务</h1>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>联系方式</h3>
+            <p><strong>邮箱：</strong> <a href="mailto:you@example.com">1181175347@qq.com</a></p>
+            <p><strong>电话：</strong> <a href="tel:+8613800000000">+86 190 6673 9927</a></p>
+            <p><strong>地址：</strong> 上海市 浦东新区 示例路 100 号</p>
+            <p><strong>办公时间：</strong> 周一 - 周五 09:00 - 17:00</p>
+            <hr>
+            <h4>联系表单（示例）</h4>
+            <form id="contact-form" action="#" method="POST">
+              <div>
+                <label>姓名</label><br>
+                <input name="name" type="text" placeholder="你的姓名" required>
+              </div>
+              <div>
+                <label>邮箱</label><br>
+                <input name="email" type="email" placeholder="your@email" required>
+              </div>
+              <div>
+                <label>消息</label><br>
+                <textarea name="message" rows="4" placeholder="写下你的消息"></textarea>
+              </div>
+              <div style="margin-top:8px;"><button type="submit" class="contact-btn">发送</button></div>
+            </form>
+            <p style="font-size:12px;color:#9aa;">提示：当前表单为示例，不会发送到服务器。需要我帮你接入邮件服务或后端吗？</p>
+          </div>
+
+          <div class="contact-card">
+            <h3>设备信息（仅用于调试）</h3>
+            <div class="device-info" id="device-info">
+              正在检测设备信息...
+            </div>
+            <hr>
+            <h4>其他联系方式</h4>
+            <p>GitHub: <a href="https://github.com/longlong" target="_blank">github.com/yourname</a></p>
+            <p>微信：请扫码或添加邮箱联系以获取二维码</p>
+          </div>
+        </div>
+
+      </section>
+
+      <footer class="site-footer">
+        <p>版权信息 © 2026</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // 简单脚本：在页面上显示用户设备信息（浏览器、平台、分辨率）
+    (function(){
+      function getDeviceInfo(){
+        var ua = navigator.userAgent || 'unknown';
+        var platform = navigator.platform || 'unknown';
+        var screenSize = window.screen ? (window.screen.width + 'x' + window.screen.height) : 'unknown';
+        var viewport = window.innerWidth + 'x' + window.innerHeight;
+        return {
+          ua: ua,
+          platform: platform,
+          screen: screenSize,
+          viewport: viewport
+        };
+      }
+      var info = getDeviceInfo();
+      var el = document.getElementById('device-info');
+      if(el){
+        el.textContent = '';
+        var lines = [
+          'UserAgent: ' + info.ua,
+          'Platform: ' + info.platform,
+          '屏幕分辨率: ' + info.screen,
+          '视口大小: ' + info.viewport
+        ];
+        el.textContent = lines.join('\n');
+      }
+
+      // 表单提交拦截（示例）：阻止默认提交并显示提示
+      var form = document.getElementById('contact-form');
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          alert('表单已提交（示例），请配置后端以实际发送。');
+        });
+      }
+    })();
+  </script>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

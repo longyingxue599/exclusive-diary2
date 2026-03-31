@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的项目 - 个人博客</title>
+    <!-- 设置基础URL -->
+    <base href="/exclusive-diary1.github.io/">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar-container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar-placeholder">
+                        <img src="assets/img/photo.png" alt="用户头像" />
+                    </div>
+                    <span class="user-handle">龙龙龙</span>
+                    <p class="tagline">为了梦想而努力，记录每一分一秒!</p>
+                </div>
+                <div class="contact-info">
+                    <ul>
+                        <li>毕业院校: 某某学院</li>
+                        <li>所在城市: 上海</li>
+                        <li>工作年限: 1年</li>
+                        <li>技能: HTML</li>
+                        <li>技能: CSS</li>
+                        <li>技能: JS</li>
+                        <li>技能: Vue</li>
+                        <li>技能: Node.js 基础</li>
+                    </ul>
+                </div>
+                <button class="contact-btn">联系</button>
+            </div>
+        </aside>
+
+        <main class="main-content-container">
+            <header class="site-header">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="interface.html">首页</a></li>
+                        <li><a href="projects.html" class="active">学习笔记展示</a></li>
+                        <li><a href="experience.html">经验</a></li>
+                        <li class="dropdown"><a href="#">联系▼</a>
+                            <div class="dropdown-content"> 
+                                <a href="#">基本信息</a>
+                                <a href="contact.html">咨询服务</a>
+                                <a href="#">技术支持</a>
+                                <a href="index.html">退出登录</a>
+                            </div>
+                        </li> 
+                        <li><button id="theme-toggle" class="nav-toggle-btn">切换主题</button></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <section class="content-area">
+                <div class="hero-section">
+                    <h1>学习经历</h1>
+                </div>
+
+                <div class="stats-overview" id="projects-list">
+                    <article class="stat-card">
+                        <h4>内容一：html</h4>
+                        <p>网页的骨架和内容结构 🏗️ — 定义页面元素和层次；</p>
+                    </article>
+                    <article class="stat-card">
+                        <h4>内容二：css</h4>
+                        <p>网页的外观和样式 🎨 — 控制颜色、布局、字体和动画；</p>
+                    </article>
+                    <article class="stat-card">
+                        <h4>内容三：JavaScript</h4>
+                        <p>网页的行为和交互 ⚡ — 响应用户操作、处理逻辑、动态更新内容。</p>
+                    </article>
+                </div>
+
+                <div class="story-section">
+                    <h3>详细笔记内容</h3>                   
+                    <a href="./html/ReviewTable.html">html</a><br>
+                    <a href="./html/ReviewTable2.html">css</a><br>
+                    <a href="./html/ReviewTable3.html">JavaScript</a><br>
+                    <a href="./html/front_end_cheatsheet.html">HTML/CSS/JS重点</a><br>
+                    <a href="./html/front_end_cheatsheet2.html">HTML/CSS/JS汇总</a>
+                </div>
+            </section>
+
+            <footer class="site-footer" id="contact">
+                <p>版权信息 © 2026</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

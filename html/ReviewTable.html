@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>CSS 快速复习表</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+:root {
+    --header-height: 60px;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    /* 核心修改：原有 20px 边距 + 60px 导航高度 = 80px */
+    padding: calc(var(--header-height) + 20px) 20px 20px 20px;
+}
+h2 { margin-top: 40px; color: #4A90E2; border-bottom: 2px solid #4A90E2; display: inline-block; padding-bottom: 5px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 14px; vertical-align: top; }
+th { background-color: #eee; }
+tr:nth-child(even) { background-color: #fafafa; }
+.symbol { font-weight: bold; text-align: center; }
+.layout { background-color: #e0f7fa; }
+.typography { background-color: #fff3e0; }
+.background { background-color: #e8f5e9; }
+.ui { background-color: #f3e5f5; }
+.animation { background-color: #fff9c4; }
+.responsive { background-color: #ffe0b2; }
+.variables { background-color: #c8e6c9; }
+</style>
+</head>
+<body>
+                <header class="site-header">
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="../interface.html">首页</a></li>
+                            <li><a href="../projects.html">学习笔记展示</a></li>
+                            <li><a href="../experience.html">经验</a></li>
+                            <!-- 添加一个类以便样式控制 -->
+                            <li class="dropdown"><a href="#">联系▼</a>
+                                <div class="dropdown-content"> 
+                                    <a href="#">基本信息</a>
+                                    <a href="../contact.html">咨询服务</a>
+                                    <a href="#">技术支持</a>
+                                    <a href="../index.html">退出登录</a>
+                                </div>
+                            </li>
+                            &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </ul>
+                    </nav>
+                </header>
+<main class="main-content-container">
+<h1>CSS 快速复习表（暗色 & 浅色主题项目）</h1>
+<p>每个属性包含：作用 / 视觉效果 / 设计目的，配合符号帮助记忆</p>
+
+<h2>布局 Layout</h2>
+<table>
+<tr class="layout"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="layout"><td class="symbol">🔲</td><td>display</td><td>控制元素排列方式 block / flex / grid</td><td>元素排列方式变化</td><td>页面结构清晰，易控制布局</td></tr>
+<tr class="layout"><td class="symbol">↔️</td><td>flex</td><td>弹性宽度 / 剩余空间占用</td><td>内容自适应宽度</td><td>响应式布局</td></tr>
+<tr class="layout"><td class="symbol">↔️</td><td>margin / padding</td><td>外 / 内间距</td><td>元素间距，分隔视觉</td><td>保持布局整洁，提升可读性</td></tr>
+<tr class="layout"><td class="symbol">📏</td><td>width / height</td><td>元素尺寸控制</td><td>占用空间大小</td><td>可控的 UI 布局</td></tr>
+<tr class="layout"><td class="symbol">📌</td><td>position</td><td>定位方式 relative / absolute / fixed</td><td>元素层级和位置变化</td><td>固定导航 / 弹出层 / 遮罩</td></tr>
+<tr class="layout"><td class="symbol">⬆️</td><td>overflow</td><td>溢出处理（scroll / hidden / auto）</td><td>滚动或隐藏内容</td><td>保持界面整洁</td></tr>
+<tr class="layout"><td class="symbol">🎯</td><td>top / left / right / bottom</td><td>配合 position 精确定位</td><td>元素精确位置</td><td>弹出菜单、卡片定位</td></tr>
+</table>
+
+<h2>文本 Typography</h2>
+<table>
+<tr class="typography"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="typography"><td class="symbol">🔤</td><td>font-family</td><td>字体栈</td><td>文字风格</td><td>保证跨平台一致性</td></tr>
+<tr class="typography"><td class="symbol">🔠</td><td>font-size</td><td>文字大小</td><td>大小对比</td><td>信息层级清晰</td></tr>
+<tr class="typography"><td class="symbol">**</td><td>font-weight</td><td>粗细</td><td>加粗 / 轻</td><td>突出重点</td></tr>
+<tr class="typography"><td class="symbol">🎨</td><td>color</td><td>文字颜色</td><td>高对比 / 次要</td><td>可读性 / 信息层级</td></tr>
+<tr class="typography"><td class="symbol">↕️</td><td>line-height</td><td>行高</td><td>提高阅读舒适性</td><td>文本可读性</td></tr>
+<tr class="typography"><td class="symbol">↔️</td><td>text-align</td><td>文本对齐方式</td><td>居中 / 左右</td><td>视觉平衡</td></tr>
+</table>
+
+<h2>背景 & 边框 Background & Border</h2>
+<table>
+<tr class="background"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="background"><td class="symbol">🟦</td><td>background-color</td><td>背景色</td><td>色块分隔</td><td>区分内容区域</td></tr>
+<tr class="background"><td class="symbol">🌄</td><td>background-image</td><td>背景图</td><td>视觉装饰 / 主题</td><td>提升视觉吸引力</td></tr>
+<tr class="background"><td class="symbol">📐</td><td>background-size</td><td>背景铺满方式</td><td>等比 / 填充</td><td>视觉完整性</td></tr>
+<tr class="background"><td class="symbol">🎯</td><td>background-position</td><td>背景位置</td><td>居中 / 角落</td><td>美观布局</td></tr>
+<tr class="background"><td class="symbol">➖</td><td>border</td><td>边框</td><td>突出 / 分隔</td><td>界面分层</td></tr>
+<tr class="background"><td class="symbol">🔵</td><td>border-radius</td><td>圆角</td><td>柔和感</td><td>提升友好感</td></tr>
+<tr class="background"><td class="symbol">☁️</td><td>box-shadow</td><td>阴影</td><td>浮起感 / 层次</td><td>聚焦与层次感</td></tr>
+</table>
+
+<h2>交互 / UI Interaction</h2>
+<table>
+<tr class="ui"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="ui"><td class="symbol">🖱️</td><td>cursor</td><td>鼠标样式</td><td>手型 / 默认</td><td>提示可交互</td></tr>
+<tr class="ui"><td class="symbol">❌</td><td>outline</td><td>聚焦轮廓</td><td>去掉蓝色</td><td>统一风格</td></tr>
+<tr class="ui"><td class="symbol">⏳</td><td>transition</td><td>属性过渡</td><td>平滑变化</td><td>提升交互体验</td></tr>
+<tr class="ui"><td class="symbol">✨</td><td>:hover / :focus</td><td>悬停 / 聚焦状态</td><td>颜色或边框变化</td><td>提示用户操作</td></tr>
+<tr class="ui"><td class="symbol">⬆️</td><td>z-index</td><td>层级</td><td>前后顺序变化</td><td>控制弹出层 / 遮罩</td></tr>
+<tr class="ui"><td class="symbol">🌫️</td><td>opacity</td><td>透明度</td><td>轻重提示</td><td>渐入 / 交互反馈</td></tr>
+</table>
+
+<h2>动画 Animation</h2>
+<table>
+<tr class="animation"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="animation"><td class="symbol">🎬</td><td>animation</td><td>元素动画</td><td>渐显 / 移动</td><td>提升界面动感</td></tr>
+<tr class="animation"><td class="symbol">⏱️</td><td>@keyframes</td><td>定义动画步骤</td><td>起点 / 终点</td><td>可控动画效果</td></tr>
+<tr class="animation"><td class="symbol">🔄</td><td>transform</td><td>平移 / 缩放 / 旋转</td><td>动态运动</td><td>交互反馈</td></tr>
+</table>
+
+<h2>响应式 Responsive</h2>
+<table>
+<tr class="responsive"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="responsive"><td class="symbol">📱</td><td>@media</td><td>媒体查询</td><td>屏幕适配</td><td>移动端优化</td></tr>
+<tr class="responsive"><td class="symbol">📏</td><td>max-width / min-width</td><td>元素尺寸限制</td><td>自适应布局</td><td>保持完整布局</td></tr>
+<tr class="responsive"><td class="symbol">↕️↔️</td><td>flex-direction</td><td>弹性方向</td><td>横向 / 纵向</td><td>布局切换</td></tr>
+</table>
+
+<h2>CSS 变量 Custom Properties</h2>
+<table>
+<tr class="variables"><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果</th><th>设计目的</th></tr>
+<tr class="variables"><td class="symbol">🏷️</td><td>--变量名</td><td>全局主题 / 尺寸管理</td><td>统一风格</td><td>易维护 & 快速主题切换</td></tr>
+<tr class="variables"><td class="symbol">🔗</td><td>var(--变量名)</td><td>使用变量</td><td>统一引用</td><td>减少重复代码</td></tr>
+</table>
+</main>
+<script src="../js/script.js"></script>
+</body>
+</html>

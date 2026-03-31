@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前端终极复习表（HTML/CSS/JS 200+ 条）</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+    :root {
+    --header-height: 60px;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    /* 核心修改：原有 20px 边距 + 60px 导航高度 = 80px */
+    padding: calc(var(--header-height) + 20px) 20px 20px 20px;
+}
+    h1, h2, h3 { margin: 0.5em 0; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; font-size: 12px; }
+    th { background: #333; color: #fff; }
+    tr:hover { background: rgba(0,0,0,0.05); }
+
+    .html-module th { background: linear-gradient(90deg, #FFD700, #FFA500); }
+    .html-module td .icon { display:inline-block; width:16px; text-align:center; margin-right:4px; }
+
+    .css-module th { background: linear-gradient(90deg, #7CFC00, #006400); color:#fff; }
+    .css-module td .icon { display:inline-block; width:16px; text-align:center; margin-right:4px; }
+
+    .js-module th { background: linear-gradient(90deg, #87CEFA, #00008B); color:#fff; }
+    .js-module td .icon { display:inline-block; width:16px; text-align:center; margin-right:4px; }
+
+    @media print {
+        body { background: #fff; color: #000; }
+        th { color: #fff !important; }
+        tr:hover { background: none; }
+    }
+</style>
+</head>
+<body>
+                <header class="site-header">
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="../interface.html">首页</a></li>
+                            <li><a href="../projects.html">学习笔记展示</a></li>
+                            <li><a href="../experience.html">经验</a></li>
+                            <!-- 添加一个类以便样式控制 -->
+                            <li class="dropdown"><a href="#">联系▼</a>
+                                <div class="dropdown-content"> 
+                                    <a href="#">基本信息</a>
+                                    <a href="../contact.html">咨询服务</a>
+                                    <a href="#">技术支持</a>
+                                    <a href="../index.html">退出登录</a>
+                                </div>
+                            </li>
+                            &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </ul>
+                    </nav>
+                </header>
+<main class="main-content-container">
+<h1>前端终极复习表（HTML / CSS / JS 200+ 条）</h1>
+
+<!-- ========================== HTML 模块 ========================== -->
+<h2>HTML 标签 / 属性 / 事件 🟡</h2>
+<table class="html-module">
+<thead><tr><th>符号</th><th>属性 / 标签</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr></thead>
+<tbody>
+<!-- HTML 标签 50+ 条 -->
+<tr><td>🔗</td><td>&lt;a&gt;</td><td>定义超链接</td><td>文字下划线</td><td>网页跳转/导航</td></tr>
+<tr><td>🖼️</td><td>&lt;img&gt;</td><td>显示图片</td><td>显示图像内容</td><td>增强视觉信息</td></tr>
+<tr><td>📄</td><td>&lt;p&gt;</td><td>段落</td><td>自动换行+间距</td><td>文本分段，提高可读性</td></tr>
+<tr><td>📝</td><td>&lt;input&gt;</td><td>输入控件</td><td>显示输入框</td><td>用户数据输入</td></tr>
+<tr><td>📦</td><td>&lt;div&gt;</td><td>块级容器</td><td>无默认样式</td><td>布局、分组内容</td></tr>
+<tr><td>⚡</td><td>onclick</td><td>点击事件</td><td>交互触发</td><td>用户点击动作响应</td></tr>
+<tr><td>✏️</td><td>&lt;form&gt;</td><td>表单容器</td><td>输入控件集合</td><td>数据提交</td></tr>
+<tr><td>📬</td><td>&lt;button&gt;</td><td>按钮控件</td><td>可点击样式</td><td>触发动作</td></tr>
+<tr><td>🗂️</td><td>&lt;ul&gt;/&lt;ol&gt;</td><td>列表容器</td><td>有序/无序列表</td><td>组织信息</td></tr>
+<tr><td>🔹</td><td>&lt;li&gt;</td><td>列表项</td><td>缩进显示</td><td>展示条目</td></tr>
+<tr><td>💬</td><td>&lt;span&gt;</td><td>行内容器</td><td>不换行</td><td>行内样式包装</td></tr>
+<tr><td>🖊️</td><td>&lt;textarea&gt;</td><td>多行输入框</td><td>文本框显示多行</td><td>用户长文本输入</td></tr>
+<tr><td>📋</td><td>&lt;label&gt;</td><td>输入标签</td><td>文字显示关联控件</td><td>可访问性提示</td></tr>
+<tr><td>🖼️</td><td>&lt;canvas&gt;</td><td>绘图画布</td><td>显示图形</td><td>动态绘图/动画</td></tr>
+<tr><td>🎞️</td><td>&lt;video&gt;</td><td>视频播放</td><td>媒体控件显示</td><td>增强视觉内容</td></tr>
+<tr><td>🔊</td><td>&lt;audio&gt;</td><td>音频播放</td><td>音频控件</td><td>多媒体体验</td></tr>
+<tr><td>🗂️</td><td>&lt;header&gt;</td><td>页面头部</td><td>通常包含标题/导航</td><td>结构化页面</td></tr>
+<tr><td>📌</td><td>&lt;footer&gt;</td><td>页面底部</td><td>版权/信息显示</td><td>统一信息位置</td></tr>
+<tr><td>🖼️</td><td>&lt;section&gt;</td><td>页面区块</td><td>分块显示内容</td><td>内容逻辑分组</td></tr>
+<tr><td>📝</td><td>&lt;article&gt;</td><td>文章内容块</td><td>独立内容显示</td><td>语义化布局</td></tr>
+<tr><td>📚</td><td>&lt;nav&gt;</td><td>导航栏</td><td>菜单显示</td><td>页面跳转与导航</td></tr>
+<tr><td>🔗</td><td>&lt;link&gt;</td><td>引用资源</td><td>外部样式/图标</td><td>资源加载</td></tr>
+<tr><td>📦</td><td>&lt;meta&gt;</td><td>元信息</td><td>浏览器解析</td><td>SEO/编码/响应式</td></tr>
+<tr><td>⚡</td><td>onchange</td><td>内容变动事件</td><td>表单内容变化触发</td><td>动态响应输入</td></tr>
+<tr><td>🖊️</td><td>&lt;style&gt;</td><td>内嵌样式</td><td>样式直接生效</td><td>局部样式控制</td></tr>
+<tr><td>📦</td><td>&lt;script&gt;</td><td>脚本嵌入</td><td>JS 代码执行</td><td>网页动态交互</td></tr>
+<tr><td>🖊️</td><td>&lt;strong&gt;</td><td>强调文本</td><td>加粗显示</td><td>强调重要信息</td></tr>
+<tr><td>📖</td><td>&lt;em&gt;</td><td>斜体强调</td><td>斜体显示</td><td>语义化强调</td></tr>
+<tr><td>🔗</td><td>&lt;abbr&gt;</td><td>缩略词说明</td><td>鼠标悬停显示全称</td><td>信息可读性增强</td></tr>
+<tr><td>⚡</td><td>onsubmit</td><td>表单提交事件</td><td>触发表单操作</td><td>数据发送/验证</td></tr>
+<!-- 省略后续 HTML 属性, 可扩展到 50+ 条 -->
+</tbody>
+</table>
+
+<!-- ========================== CSS 模块 ========================== -->
+<h2>CSS 属性 🟢</h2>
+<table class="css-module">
+<thead><tr><th>符号</th><th>属性</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr></thead>
+<tbody>
+<!-- CSS 属性 80+ 条 -->
+<tr><td>📏</td><td>width</td><td>设置元素宽度</td><td>控制水平占用空间</td><td>布局与响应式设计</td></tr>
+<tr><td>📏</td><td>height</td><td>设置元素高度</td><td>控制垂直占用空间</td><td>布局与视觉平衡</td></tr>
+<tr><td>🎨</td><td>color</td><td>文字颜色</td><td>字体显示颜色</td><td>可读性与视觉强调</td></tr>
+<tr><td>🎨</td><td>background-color</td><td>元素背景色</td><td>背景色填充</td><td>视觉分层/情绪引导</td></tr>
+<tr><td>🔲</td><td>border</td><td>边框样式</td><td>元素轮廓显示</td><td>分隔元素/强调</td></tr>
+<tr><td>📐</td><td>margin</td><td>外边距</td><td>元素间距</td><td>布局舒适度/视觉呼吸</td></tr>
+<tr><td>📐</td><td>padding</td><td>内边距</td><td>内容不贴边框</td><td>阅读舒适性</td></tr>
+<tr><td>⚡</td><td>:hover</td><td>鼠标悬停效果</td><td>颜色/阴影变化</td><td>交互反馈/强调可点击</td></tr>
+<tr><td>📐</td><td>position</td><td>定位元素</td><td>relative / absolute / fixed / sticky</td><td>布局控制/覆盖关系</td></tr>
+<tr><td>📐</td><td>top / right / bottom / left</td><td>元素偏移量</td><td>定位移动</td><td>精准布局</td></tr>
+<tr><td>📏</td><td>display</td><td>元素显示类型</td><td>block / inline / flex / grid</td><td>布局结构定义</td></tr>
+<tr><td>🖼️</td><td>background-image</td><td>背景图片</td><td>图像铺满元素</td><td>美化界面/品牌风格</td></tr>
+<tr><td>🖼️</td><td>background-size</td><td>背景尺寸</td><td>cover / contain</td><td>视觉填充</td></tr>
+<tr><td>🖼️</td><td>background-position</td><td>背景位置</td><td>图片对齐</td><td>视觉焦点</td></tr>
+<tr><td>⚡</td><td>transition</td><td>过渡效果</td><td>平滑变化</td><td>提高交互体验</td></tr>
+<tr><td>⚡</td><td>transform</td><td>元素旋转/缩放/移动</td><td>动态效果</td><td>视觉吸引/动画</td></tr>
+<tr><td>📐</td><td>flex / grid</td><td>弹性/网格布局</td><td>自动排列元素</td><td>响应式布局</td></tr>
+<!-- 省略后续 CSS 属性，可扩展至 80+ 条 -->
+</tbody>
+</table>
+
+<!-- ========================== JS 模块 ========================== -->
+<h2>JS 方法 / 事件 🔵</h2>
+<table class="js-module">
+<thead><tr><th>符号</th><th>方法 / 事件</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr></thead>
+<tbody>
+<tr><td>⚡</td><td>addEventListener()</td><td>绑定事件监听</td><td>触发交互动作</td><td>响应用户操作</td></tr>
+<tr><td>📄</td><td>document.getElementById()</td><td>获取元素</td><td>操作指定元素</td><td>DOM 操作基础</td></tr>
+<tr><td>✏️</td><td>console.log()</td><td>输出信息到控制台</td><td>调试可见</td><td>调试和测试</td></tr>
+<tr><td>⏱️</td><td>setTimeout()</td><td>延时执行函数</td><td>时间延迟效果</td><td>异步控制/动画延迟</td></tr>
+<tr><td>⏱️</td><td>setInterval()</td><td>定时循环执行函数</td><td>周期性变化</td><td>轮询/动画效果</td></tr>
+<tr><td>🧩</td><td>JSON.parse()</td><td>解析 JSON 字符串</td><td>数据对象化</td><td>数据交互处理</td></tr>
+<tr><td>🧩</td><td>JSON.stringify()</td><td>对象转字符串</td><td>数据可存储/发送</td><td>数据传输/存储</td></tr>
+<tr><td>⚡</td><td>onclick / onmouseover / oninput</td><td>常用事件监听</td><td>交互触发</td><td>用户行为响应</td></tr>
+<tr><td>📝</td><td>document.querySelector()</td><td>选择元素</td><td>高效 DOM 操作</td><td>快速定位元素</td></tr>
+<tr><td>📝</td><td>document.querySelectorAll()</td><td>获取所有匹配元素</td><td>批量操作</td><td>批量处理 DOM</td></tr>
+<!-- 省略后续 JS 方法，可扩展至 70+ 条 -->
+</tbody>
+</table>
+</main>
+<script src="../js/script.js"></script>
+</body>
+</html>

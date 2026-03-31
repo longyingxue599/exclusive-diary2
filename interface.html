@@ -1,0 +1,119 @@
+<!-- interface.html -->
+<!DOCTYPE html>//作用：声明文档类型和 HTML 版本，确保浏览器以正确的方式解析页面。
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人博客--思维的记录</title>
+    <!-- 设置基础URL -->
+    <base href="/exclusive-diary1.github.io/">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入图标库，例如阿里巴巴矢量图标库 (Iconfont) -->
+    <link rel="stylesheet" href="//://at.alicdn.com"> 
+</head>
+<body>
+    <!-- 整个页面的外层容器 -->
+    <div class="page-wrapper">
+        
+        <!-- 左侧边栏容器：需要独立滚动 -->
+        <aside class="sidebar-container">
+            <div class="profile-card">
+                <!-- ... 左侧卡片内容，参考之前的代码 ... -->
+                <div class="profile-header">
+                    <div class="avatar-placeholder">
+                        <img src="assets/img/photo.png" alt="用户头像" class="dropdown-card"/>
+                    </div> 
+                    <span class="user-handle">龙龙龙</span>
+                    <p class="tagline">为了梦想而努力，记录每一分一秒!</p>
+                </div>
+                <div class="contact-info">
+                    <ul>
+                        <li>毕业院校: 某某学院</li>
+                        <li>所在城市: 上海</li>
+                        <li>工作年限: 1年</li>
+                        <!-- 增加更多内容以触发滚动条 -->
+                        <li>技能: HTML</li>
+                        <li>技能: CSS</li>
+                        <li>技能: JS</li>
+                        <li>技能: Vue</li>
+                        <li>技能: Node.js 基础</li>
+                    </ul>
+                </div>
+                
+                <button class="contact-btn">联系</button>
+            </div>
+        </aside>
+
+        <!-- 右侧内容区域容器：需要独立滚动 -->
+        <main class="main-content-container" id="home-section">
+            <!-- 顶栏导航 -->
+            <header class="site-header">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="interface.html" class="active">首页</a></li>
+                        <li><a href="projects.html">学习笔记展示</a></li>
+                        <li><a href="experience.html">经验</a></li>
+                        <!-- 添加一个类以便样式控制 -->
+                        <li class="dropdown"><a href="#">联系▼</a>
+                            <div class="dropdown-content"> 
+                                <a href="#">基本信息</a>
+                                <a href="contact.html">咨询服务</a>
+                                <a href="#">技术支持</a>
+                                <a href="index.html">退出登录</a>
+                            </div>
+                        </li>
+                        
+                        <li><button id="theme-toggle" class="nav-toggle-btn">切换主题</button></li>
+                    </ul>
+                </nav>
+            </header>
+                <!-- 右侧实际内容 -->
+                <section class="content-area">
+                    <!-- 蓝紫色主视觉区域 -->
+                    <div class="hero-section">
+                        <h1>加油，记录美好生活</h1>
+                    </div>
+
+                    <!-- 三个数据统计卡片容器 -->
+                    <!-- <div class="stats-overview" id="projects"> 
+                        <article class="stat-card">卡拉米</article>
+                        <article class="stat-card">汪汪大队</article>
+                        <article class="stat-card">猪猪侠</article>
+                    </div> -->
+
+                    <!-- 我的故事区域 (仅用于占位，保持简洁) -->
+                    <div class="story-section" id="experience">
+                        <h3>我的故事：</h3>
+                       <!-- 删除所有重复的 <p> 标签，保持代码整洁 -->
+                          <p>欢迎来到我的个人博客！这里是我记录生活点滴和技术心得的地方。希望通过分享我的经历和见解，能够帮助到和我一样热爱编程和生活的你。</p>
+                    </div>
+                        
+                    <!-- 文章发布区域 -->
+                    <section class="upload-section">
+                        <div class="post-editor-card">
+                            <h3>记录新动态</h3>
+                            <input type="text" id="post-title" placeholder="给你的动态起个标题...">
+                            <textarea id="post-content" rows="5" placeholder="此刻在想什么？"></textarea>
+                            <div class="editor-footer">
+                                <button id="submit-post" class="contact-btn">立即发布</button>
+                                <button id="clear-storage" class="nav-toggle-btn" style="background:#ff4757; margin-left:10px;">清空所有</button>
+                                <li>记录动态: <span id="post-count" style="font-weight:bold; color:#1e90ff;">0</span> 条</li>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- 文章列表容器：现在它位于 content-area 内部正确的位置 -->
+                    <div id="article-list">
+                        <!-- JS 动态生成的文章将出现在这里 -->                      
+                    </div>
+
+                </section> <!-- content-area 结束 -->
+                <!-- 底部区域，用于联系方式锚点 -->
+                <footer class="site-footer" id="contact">
+                     <p>版权信息 © 2026</p>
+                </footer>
+        </main>
+    </div>
+     <!-- 原有 JS 文件 -->
+        <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,534 @@
+/* =====================================================
+   1. 全局重置 + CSS 变量（优化对比度）
+===================================================== */
+
+/* 全局选择器重置 */
+* {
+    box-sizing: border-box; /* 作用：width/height 包含 padding 和 border；视觉效果：尺寸计算一致；设计目的：统一布局基础 */
+    margin: 0; /* 作用：清除默认外边距；视觉效果：元素不受浏览器默认间距干扰；设计目的：统一起点 */
+    padding: 0; /* 作用：清除默认内边距；视觉效果：内容不被默认 padding 推开；设计目的：统一起点 */
+}
+
+/* 去掉列表默认样式 */
+ul {
+    list-style: none; /* 作用：去掉默认圆点；视觉效果：列表干净整洁；设计目的：统一列表样式 */
+}
+
+/* 根变量定义 */
+:root {
+    --header-height: 60px; /* 导航栏高度；视觉效果：导航栏统一高度；设计目的：全局布局一致 */
+    --sidebar-width: 280px; /* 侧边栏宽度固定；视觉效果：侧边栏占位稳定；设计目的：左右布局可控 */
+    --card-radius: 12px; /* 卡片圆角；视觉效果：界面柔和；设计目的：统一界面圆角风格 */
+    --input-radius: 8px; /* 输入框圆角；视觉效果：输入框柔和；设计目的：表单风格统一 */
+    --btn-radius: 24px; /* 胶囊按钮圆角；视觉效果：按钮圆润；设计目的：统一按钮样式 */
+    --bg-dark: #0f1a2b; /* 主背景色；视觉效果：深色界面；设计目的：深色模式主色 */
+    --bg-dark-panel: #192839; /* 面板背景色；视觉效果：与背景区分；设计目的：层次感 */
+    --bg-card: #1f2c3e; /* 卡片背景色；视觉效果：卡片凸显；设计目的：层次分明 */
+    --text-main: #e5e5e5; /* 主文字颜色；视觉效果：高对比易读；设计目的：深色模式可读性高 */
+    --text-muted: #aaa; /* 次要文字颜色；视觉效果：弱化信息；设计目的：提示次要信息 */
+    --nav-link-color: #1a73e8; /* 导航链接默认颜色；视觉效果：明亮突出；设计目的：导航可识别 */
+    --nav-link-hover: #145dbf; /* 导航悬停颜色；视觉效果：交互反馈明显；设计目的：用户体验增强 */
+    --focus-color: #6c5ce7; /* 输入框/按钮聚焦颜色；视觉效果：焦点突出；设计目的：交互反馈明显 */
+    --gradient-primary: linear-gradient(to right, #6F42C1, #4A90E2); /* 主渐变色；视觉效果：渐变装饰；设计目的：增强界面层次 */
+    --btn-primary-bg: #071133; /* 登录按钮背景色；视觉效果：深色突出；设计目的：重要按钮 */
+    --btn-contact-bg: #e91e63; /* 联系按钮背景色；视觉效果：鲜艳突出；设计目的：行动呼吁按钮 */
+}
+
+/* =====================================================
+   2. 全站基础 body
+===================================================== */
+/* 全局 body 样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", Helvetica, Arial, sans-serif; /* 系统优先字体栈；视觉效果：文字自然现代；设计目的：跨平台一致性 */
+    background-color: var(--bg-dark); /* 背景色；视觉效果：深色模式；设计目的：统一主色 */
+    color: var(--text-main); /* 主文字颜色；视觉效果：可读性高；设计目的：保证内容阅读舒适 */
+    line-height: 1.6; /* 行高；视觉效果：阅读舒适；设计目的：提升可读性 */
+}
+
+/* =====================================================
+   3. 主站页面布局（header + sidebar + content）
+===================================================== */
+/* 应用页面整体布局 */
+body.app-page {
+    overflow: hidden; /* 禁止 body 滚动；视觉效果：滚动由内部区域控制；设计目的：布局可控 */
+}
+/* 固定顶部导航栏 */
+.site-header {
+    height: var(--header-height); /* 导航栏高度固定；视觉效果：一致性；设计目的：全局统一 */
+    background-color: var(--bg-dark-panel); /* 面板背景；视觉效果：区分背景和内容；设计目的：增强层次感 */
+    padding: 10px 20px; /* 内边距；视觉效果：内容不贴边；设计目的：可读性和舒适度 */
+    position: fixed; /* 固定导航栏；视觉效果：导航始终可见；设计目的：用户操作便利 */
+    top: 0; left: 0; /* 定位在顶部左边；视觉效果：固定位置；设计目的：全局布局 */
+    width: 100%; /* 横向铺满；视觉效果：导航贯穿页面；设计目的：美观统一 */
+    z-index: 1000; /* 层级最高；视觉效果：导航覆盖内容；设计目的：保证可操作 */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35); /* 底部阴影；视觉效果：立体感；设计目的：导航浮起明显 */
+}
+/* 导航菜单布局 */
+.main-nav ul {
+    display: flex; /* 横向布局；视觉效果：水平排列；设计目的：方便导航 */
+    gap: 20px; /* 菜单间距；视觉效果：间隔清晰；设计目的：提高可点击性 */
+    justify-content: flex-end; /* 内容靠右对齐；视觉效果：布局美观；设计目的：符合 UI 习惯 */
+    align-items: center; /* 垂直居中；视觉效果：整齐；设计目的：视觉统一 */
+}
+/* 导航链接样式 */
+.main-nav a,
+.nav-toggle-btn {
+    background: none; /* 去掉默认背景；视觉效果：简洁；设计目的：统一风格 */
+    border: none; /* 去掉边框；视觉效果：简洁；设计目的：统一风格 */
+    color: var(--nav-link-color); /* 链接颜色；视觉效果：明亮；设计目的：可识别导航 */
+    font-size: 14px; /* 字体大小；视觉效果：清晰可读；设计目的：统一风格 */
+    cursor: pointer; /* 鼠标手型；视觉效果：提示可点击；设计目的：交互反馈 */
+    text-decoration: none; /* 去下划线；视觉效果：干净；设计目的：风格统一 */
+}
+/* 悬停和激活状态 */
+.main-nav a:hover {
+    color: var(--nav-link-hover); /* 悬停变色；视觉效果：交互提示；设计目的：用户体验提升 */
+}
+/* 当前页高亮 */
+.main-nav a.active {
+    font-weight: 700; /* 当前页加粗；视觉效果：高亮；设计目的：导航状态指示 */
+}
+/* 页面主内容布局 */
+.page-wrapper {
+    display: flex; /* 左右布局；视觉效果：分栏明确；设计目的：页面主布局 */
+    margin-top: var(--header-height); /* 避开导航栏；视觉效果：不会遮挡；设计目的：布局正确 */
+    height: calc(100vh - var(--header-height)); /* 剩余高度；视觉效果：内容填满屏幕；设计目的：布局自适应 */
+    position: relative; /* 相对定位；视觉效果：可作为子元素定位参照；设计目的：布局控制 */
+    cursor: pointer; /* 鼠标手型；视觉效果：整体可交互；设计目的：提示可操作区域 */
+}
+/* 当屏幕宽度小于 768px（手机端）时执行以下样式 */
+@media screen and (max-width: 768px) {
+    .page-wrapper {
+        /* 1. 核心修改：由左右布局改为上下布局 */
+        flex-direction: column; 
+        /* 2. 核心修改：取消固定高度，允许内容撑开页面产生滚动条 */
+        height: auto; 
+        min-height: calc(100vh - var(--header-height)); 
+        /* 3. 这里的 margin-top 保持现状即可 */
+        overflow-x: hidden; /* 防止左右晃动 */
+    }
+    /* 4. 确保内部的侧边栏和主内容在手机上宽度占满 100% */
+    .sidebar-container, 
+    .main-content { /* 假设你的主内容类名是这个 */
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+/* 侧边栏样式 */
+.sidebar-container {
+    flex: 0 0 var(--sidebar-width); /* 固定宽度；视觉效果：侧边栏稳定；设计目的：左右布局明确 */
+    background-color: var(--bg-dark); /* 背景色；视觉效果：区分主内容；设计目的：层次分明 */
+    padding: 20px; /* 内边距；视觉效果：内容不贴边；设计目的：可读性 */
+    overflow-y: auto; /* 超出内容滚动；视觉效果：滚动流畅；设计目的：内容完整显示 */
+}
+/* 响应式适配：针对手机端（屏幕宽度小于 768px） */
+@media screen and (max-width: 768px) {   
+    /* 1. 让最外层容器从左右排列 变成 上下排列 */
+    .page-wrapper {
+        flex-direction: column !important;
+        height: auto !important; /* 允许页面向下滚动，不限制在屏幕高度内 */
+    }
+    /* 2. 修改侧边栏：让它占满宽度，不再固定 */
+    .sidebar-container {
+        flex: none !important;    /* 取消固定的 flex 比例 */
+        width: 100% !important;  /* 宽度占满手机屏幕 */
+        height: auto !important; /* 高度随内容自适应 */
+        overflow-y: visible !important; /* 手机端通常让整页滚动，而不是局部滚动 */
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* 可选：加个底边线区分内容 */
+        padding: 15px;           /* 手机端稍微缩小内边距 */
+    }
+    /* 3. 确保头像和文字在手机上居中（可选，视觉更佳） */
+    .profile-header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.main-content-container {
+    flex: 1; /* 占剩余空间；视觉效果：内容区域自适应；设计目的：主内容显示充分 */
+    background-color: var(--bg-dark-panel); /* 面板背景；视觉效果：和侧边栏区分；设计目的：层次感 */
+    overflow-y: auto; /* 内容滚动；视觉效果：独立滚动；设计目的：用户体验优化 */
+}
+
+/* =====================================================
+   4. 公共组件（Profile/Stats/Hero/Footer）
+===================================================== */
+
+.profile-card,
+.hero-section,
+.stat-card,
+.story-section,
+.site-footer {
+    border-radius: var(--card-radius); /* 圆角；视觉效果：柔和；设计目的：统一界面圆角风格 */
+    margin-bottom: 20px; /* 底部间距；视觉效果：元素分离；设计目的：增强可读性 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3); /* 阴影；视觉效果：浮起感明显；设计目的：层次突出 */
+}
+/* 计数器 */
+#post-count {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);/* 过渡动画；视觉效果：变化平滑；设计目的：增强交互体验 */
+    display: inline-block;/* 使 transform 生效；视觉效果：动画流畅；设计目的：交互反馈 */
+}
+/* 数字变化时的小动画类，可通过 JS 切换触发 */
+.count-bump { transform: scale(1.3); }/* 放大效果；视觉效果：数字突出；设计目的：引起注意 */
+/* Profile 卡片 */
+.profile-card {
+    background: var(--bg-card); /* 背景色；视觉效果：卡片突出；设计目的：与面板区分 */
+    padding: 20px; /* 内边距；视觉效果：内容不贴边；设计目的：可读性 */
+    position: relative; /* 相对定位；视觉效果：可放置绝对定位元素；设计目的：布局控制 */
+    display: inline-block; /* 根据内容宽度自适应；视觉效果：自然尺寸；设计目的：灵活布局 */
+}
+/* 头像占位 */
+.avatar-placeholder {
+    --avatar-size: 80px; /* 头像尺寸变量；视觉效果：统一头像大小；设计目的：全局统一 */
+    width: var(--avatar-size); /* 宽度；视觉效果：统一大小；设计目的：统一布局 */
+    height: var(--avatar-size); /* 高度；视觉效果：统一大小；设计目的：统一布局 */
+    border-radius: 50%; /* 圆形；视觉效果：圆形头像；设计目的：美观 */
+    overflow: hidden; /* 裁剪多余部分；视觉效果：头像干净；设计目的：保持形状 */
+    display: inline-flex; /* Flex 布局；视觉效果：居中内容；设计目的：方便居中 */
+    align-items: center; /* 垂直居中；视觉效果：头像居中；设计目的：布局美观 */
+    justify-content: center; /* 水平居中；视觉效果：头像居中；设计目的：布局美观 */
+    background: #666; /* 占位背景色；视觉效果：无图时灰色；设计目的：视觉占位 */
+    color: #fff; /* 文字颜色；视觉效果：白色文字；设计目的：对比清晰 */
+}
+/* 头像图片 */
+.avatar-placeholder img {
+    width: 100%; /* 图片铺满容器；视觉效果：完整显示；设计目的：统一尺寸 */
+    height: 100%; /* 图片高度铺满；视觉效果：完整显示；设计目的：统一尺寸 */
+    object-fit: cover; /* 等比裁剪；视觉效果：不变形；设计目的：美观 */
+}
+/* 用户名 */
+.user-handle {
+    display: block; /* 占一行；视觉效果：整齐；设计目的：排版规范 */
+    font-weight: bold; /* 加粗；视觉效果：突出用户名；设计目的：信息层次 */
+    margin-top: 10px; /* 顶部间距；视觉效果：与头像分开；设计目的：增强可读性 */
+}
+/* 标语 */
+.tagline {
+    font-size: 12px; /* 小字体；视觉效果：弱化信息；设计目的：提示次要信息 */
+    color: var(--text-muted); /* 次要文字颜色；视觉效果：弱化；设计目的：层次分明 */
+}
+/* 联系按钮 */
+.contact-btn {
+    margin-top: 15px; /* 顶部间距；视觉效果：按钮不紧贴内容；设计目的：美观可点击 */
+    background: var(--btn-contact-bg); /* 背景色；视觉效果：鲜艳突出；设计目的：行动呼吁 */
+    color: #fff; /* 文字颜色；视觉效果：白色可读；设计目的：按钮清晰 */
+    border: none; /* 去边框；视觉效果：简洁；设计目的：统一风格 */
+    padding: 8px 15px; /* 内边距；视觉效果：点击舒适；设计目的：交互体验 */
+    border-radius: 4px; /* 小圆角；视觉效果：柔和；设计目的：统一风格 */
+    cursor: pointer; /* 鼠标手型；视觉效果：可点击提示；设计目的：交互提示 */
+}
+
+/* Hero 区 */
+.hero-section {
+    height: 200px; /* 高度固定；视觉效果：显眼；设计目的：突出顶部信息 */
+    padding: 40px; /* 内边距；视觉效果：内容不贴边；设计目的：可读性 */
+    background: var(--gradient-primary); /* 渐变背景；视觉效果：装饰性强；设计目的：增强视觉层次 */
+    color: #fff; /* 字体颜色；视觉效果：高对比；设计目的：可读性 */
+}
+
+/* 统计卡片布局 */
+.stats-overview {
+    display: grid; /* Grid 布局；视觉效果：整齐排列；设计目的：三列布局 */
+    grid-template-columns: repeat(3, 1fr); /* 三等分；视觉效果：均分宽度；设计目的：整齐美观 */
+    gap: 20px; /* 间距；视觉效果：卡片不贴合；设计目的：清晰分隔 */
+}
+
+.stat-card {
+    background: var(--bg-card); /* 背景色；视觉效果：浮起；设计目的：区分内容 */
+    padding: 20px; /* 内边距；视觉效果：内容舒适；设计目的：可读性 */
+    text-align: center; /* 居中；视觉效果：整齐；设计目的：可读性 */
+}
+
+.stat-card .count {
+    font-size: 2rem; /* 大号字体；视觉效果：突出数字；设计目的：信息层级清晰 */
+    font-weight: bold; /* 加粗；视觉效果：显眼；设计目的：层次分明 */
+    color: #4A90E2; /* 主题色；视觉效果：突出；设计目的：引导视觉 */
+}
+
+.stat-card p {
+    font-size: 14px; /* 小字体；视觉效果：辅助信息；设计目的：次要信息 */
+    color: var(--text-muted); /* 弱化文字；视觉效果：不抢眼；设计目的：层次分明 */
+}
+
+.story-section {
+    background: var(--bg-card); /* 背景色；视觉效果：浮起；设计目的：区分内容 */
+    padding: 20px; /* 内边距；视觉效果：舒适；设计目的：可读性 */
+}
+
+.story-section p {
+    color: #aaa; /* 次要文字；视觉效果：弱化；设计目的：层次分明 */
+    margin-bottom: 10px; /* 底部间距；视觉效果：段落分隔；设计目的：可读性 */
+}
+
+.site-footer {
+    padding: 20px; /* 内边距；视觉效果：内容舒适；设计目的：统一底部 */
+    text-align: center; /* 居中；视觉效果：整齐；设计目的：视觉统一 */
+    background: var(--bg-dark); /* 背景色；视觉效果：深色底部；设计目的：视觉统一 */
+    color: var(--text-muted); /* 次要文字；视觉效果：弱化；设计目的：底部信息提示 */
+}
+/* =====================================================
+   5. 浅色模式（优化对比度）
+===================================================== */
+
+body.light-mode {
+    --bg-dark: #f8f9fa; /* 主背景色；视觉效果：浅色模式；设计目的：符合白天阅读习惯 */
+    --bg-dark-panel: #ffffff; /* 面板背景色；视觉效果：与主体区分；设计目的：层次分明 */
+    --bg-card: #ffffff; /* 卡片背景色；视觉效果：白卡片突出；设计目的：统一卡片风格 */
+    --text-main: #222; /* 主文字颜色；视觉效果：深色文字在浅背景上清晰；设计目的：可读性高 */
+    --text-muted: #666; /* 次要文字颜色；视觉效果：弱化信息；设计目的：层次分明 */
+}
+
+body.light-mode .profile-card,
+body.light-mode .stat-card,
+body.light-mode .story-section,
+body.light-mode .upload-section {
+    border: 1px solid rgba(0,0,0,0.06); /* 轻边框；视觉效果：分隔卡片；设计目的：层次感 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06); /* 阴影；视觉效果：轻浮起感；设计目的：浅色模式下层次分明 */
+}
+
+/* =====================================================
+   6. 登录页（优化毛玻璃 + 对比）
+===================================================== */
+
+body.login-page {
+    height: 100vh; /* 占满视口；视觉效果：全屏显示；设计目的：聚焦登录 */
+    background-image: url("./assets/img/wall.png"); /* 背景图；视觉效果：界面美观；设计目的：增加视觉吸引力 */
+    background-size: cover; /* 背景铺满；视觉效果：无空白；设计目的：美观 */
+    background-position: center; /* 背景居中；视觉效果：保持主体在中间；设计目的：美观 */
+    background-attachment: fixed; /* 背景固定；视觉效果：视差效果；设计目的：视觉层次 */
+    overflow: hidden; /* 禁止滚动；视觉效果：界面静止；设计目的：防止滚动干扰 */
+    display: flex; /* Flex 布局；视觉效果：居中；设计目的：快速布局 */
+    align-items: center; /* 垂直居中；视觉效果：卡片居中；设计目的：视觉聚焦 */
+    justify-content: center; /* 水平居中；视觉效果：卡片居中；设计目的：视觉聚焦 */
+}
+
+body.login-page::before {
+    content: ""; /* 必须有 content；视觉效果：创建遮罩层；设计目的：突出登录卡片 */
+    position: fixed; /* 固定层；视觉效果：覆盖全屏；设计目的：遮罩效果 */
+    inset: 0; /* 顶右下左 0；视觉效果：全覆盖；设计目的：遮罩 */
+    background: rgba(0,0,0,0.45); /* 半透明黑色；视觉效果：背景暗化；设计目的：突出卡片 */
+    z-index: 0; /* 层级最底；视觉效果：位于背景下方；设计目的：遮罩基础 */
+}
+
+.login-overlay {
+    position: relative; /* 相对定位；视觉效果：建立层级上下文；设计目的：确保卡片在遮罩之上 */
+    z-index: 2; /* 层级高于遮罩；视觉效果：显示在前；设计目的：保证可交互 */
+    padding: 36px; /* 内边距；视觉效果：与视口边缘保持空隙；设计目的：美观舒适 */
+}
+
+.login-card {
+    width: 760px; /* 固定宽度；视觉效果：桌面端美观；设计目的：控制卡片尺寸 */
+    max-width: 94%; /* 自适应小屏；视觉效果：响应式；设计目的：兼容不同屏幕 */
+    display: flex; /* 左右分栏；视觉效果：布局清晰；设计目的：结构分明 */
+    overflow: hidden; /* 裁剪溢出；视觉效果：保持整洁；设计目的：视觉整洁 */
+    border-radius: 16px; /* 大圆角；视觉效果：柔和；设计目的：美观 */
+    background: rgba(255,255,255,0.08); /* 半透明背景；视觉效果：毛玻璃；设计目的：突出层次 */
+    backdrop-filter: blur(12px); /* 毛玻璃模糊；视觉效果：柔化背景；设计目的：视觉分层 */
+    border: 1px solid rgba(255,255,255,0.12); /* 边框；视觉效果：轻浮起感；设计目的：层次突出 */
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5); /* 深阴影；视觉效果：突出层次；设计目的：聚焦卡片 */
+}
+
+.login-left {
+    flex: 0 0 320px; /* 固定宽度；视觉效果：左侧稳定；设计目的：头像/信息布局 */
+    padding: 40px; /* 内边距；视觉效果：内容不贴边；设计目的：舒适可读 */
+    display: flex; /* Flex 布局；视觉效果：垂直排列；设计目的：居中布局 */
+    flex-direction: column; /* 垂直排列；视觉效果：结构清晰；设计目的：信息逻辑 */
+    align-items: center; /* 水平居中；视觉效果：整齐；设计目的：视觉美观 */
+    justify-content: center; /* 垂直居中；视觉效果：居中；设计目的：视觉聚焦 */
+}
+
+.avatar-circle {
+    width: 110px; /* 宽度；视觉效果：固定头像；设计目的：统一头像尺寸 */
+    height: 110px; /* 高度；视觉效果：统一头像；设计目的：统一头像尺寸 */
+    border-radius: 50%; /* 圆形；视觉效果：圆形头像；设计目的：美观 */
+    overflow: hidden; /* 裁剪溢出；视觉效果：整洁；设计目的：保持圆形 */
+    border: 6px solid rgba(255,255,255,0.1); /* 描边；视觉效果：突出头像；设计目的：视觉分层 */
+}
+
+.avatar-circle img {
+    width: 100%; /* 图片宽度填满容器；视觉效果：完整显示；设计目的：统一尺寸 */
+    height: 100%; /* 图片高度填满容器；视觉效果：完整显示；设计目的：统一尺寸 */
+    object-fit: cover; /* 等比裁剪；视觉效果：不变形；设计目的：美观 */
+}
+
+.profile-name {
+    margin-top: 16px; /* 顶部间距；视觉效果：与头像分隔；设计目的：美观 */
+    font-size: 18px; /* 字号；视觉效果：突出用户名；设计目的：信息层次清晰 */
+    font-weight: 600; /* 半粗体；视觉效果：强调；设计目的：突出重点 */
+}
+
+.login-right {
+    flex: 1; /* 占据剩余空间；视觉效果：自适应；设计目的：表单区域 */
+    padding: 40px; /* 内边距；视觉效果：舒适；设计目的：阅读舒适 */
+}
+
+.login-title {
+    text-align: center; /* 居中；视觉效果：标题突出；设计目的：统一布局 */
+    font-size: 28px; /* 大字体；视觉效果：显眼；设计目的：强调页面目的 */
+    margin-bottom: 6px; /* 下间距；视觉效果：与副标题分开；设计目的：美观 */
+}
+
+.login-sub {
+    text-align: center; /* 居中；视觉效果：整齐；设计目的：统一布局 */
+    font-size: 14px; /* 小字体；视觉效果：辅助信息；设计目的：不抢眼 */
+    opacity: 0.8; /* 半透明；视觉效果：弱化；设计目的：辅助信息 */
+    margin-bottom: 16px; /* 底部间距；视觉效果：与表单区分；设计目的：美观 */
+}
+
+.login-form {
+    max-width: 380px; /* 最大宽度；视觉效果：表单居中；设计目的：限制表单宽度 */
+    margin: 0 auto; /* 居中；视觉效果：视觉统一；设计目的：布局美观 */
+}
+
+.login-input {
+    width: 100%; /* 占满容器；视觉效果：输入空间充足；设计目的：用户体验 */
+    padding: 12px 16px; /* 内边距；视觉效果：输入舒适；设计目的：可读性 */
+    margin: 10px 0; /* 上下间距；视觉效果：输入分隔；设计目的：可读性 */
+    border-radius: var(--btn-radius); /* 胶囊圆角；视觉效果：柔和；设计目的：统一风格 */
+    border: 1px solid rgba(255,255,255,0.2); /* 边框；视觉效果：浮起；设计目的：视觉层次 */
+    background: rgba(255,255,255,0.08); /* 半透明背景；视觉效果：毛玻璃；设计目的：视觉层次 */
+    color: #fff; /* 字体颜色；视觉效果：高对比；设计目的：可读性 */
+}
+
+.login-btn-primary {
+    width: 100%; /* 宽度填满；视觉效果：按钮突出；设计目的：易点击 */
+    margin-top: 14px; /* 顶部间距；视觉效果：与输入框分开；设计目的：视觉舒适 */
+    padding: 12px; /* 内边距；视觉效果：点击舒适；设计目的：交互体验 */
+    border-radius: var(--btn-radius); /* 圆角；视觉效果：柔和；设计目的：统一风格 */
+    border: none; /* 去边框；视觉效果：简洁；设计目的：视觉统一 */
+    background: var(--btn-primary-bg); /* 背景色；视觉效果：突出；设计目的：强调主要操作 */
+    color: #fff; /* 文字颜色；视觉效果：可读性高；设计目的：按钮清晰 */
+    font-weight: 700; /* 加粗；视觉效果：显眼；设计目的：操作优先级 */
+    cursor: pointer; /* 鼠标手型；视觉效果：提示可点击；设计目的：交互反馈 */
+}
+
+.login-status-badge {
+    position: absolute; /* 绝对定位；视觉效果：卡片右上角显示；设计目的：状态提示 */
+    top: 20px; /* 顶部间距；视觉效果：不贴边；设计目的：美观 */
+    right: 20px; /* 右侧间距；视觉效果：固定位置；设计目的：美观 */
+    color: #fff; /* 文字颜色；视觉效果：高对比；设计目的：易读 */
+    font-size: 14px; /* 字号；视觉效果：醒目；设计目的：可读性 */
+    padding: 5px 10px; /* 内边距；视觉效果：内容舒适；设计目的：美观 */
+    z-index: 100; /* 层级高；视觉效果：显示在最上层；设计目的：信息不被遮挡 */
+}
+
+.logout-btn {
+    background: none; /* 去背景；视觉效果：清爽；设计目的：伪链接风格 */
+    border: none; /* 去边框；视觉效果：清爽；设计目的：统一风格 */
+    color: #4A90E2; /* 链接色；视觉效果：可识别；设计目的：提示可操作 */
+    cursor: pointer; /* 鼠标手型；视觉效果：提示可点击；设计目的：交互反馈 */
+    text-decoration: none; /* 去下划线；视觉效果：简洁；设计目的：统一风格 */
+    margin-left: 5px; /* 左间距；视觉效果：与前元素分开；设计目的：美观 */
+    font-size: 14px; /* 字号；视觉效果：可读；设计目的：统一风格 */
+}
+
+.logout-btn:hover {
+    text-decoration: underline; /* 悬停下划线；视觉效果：交互提示；设计目的：提示可点击 */
+}
+
+@media (max-width: 880px) {
+    .login-card {
+        flex-direction: column; /* 左右改上下布局；视觉效果：响应式；设计目的：小屏可读性 */
+    }
+    .login-left,
+    .login-right {
+        padding: 24px; /* 缩小内边距；视觉效果：适应小屏；设计目的：布局美观 */
+    }
+}
+
+/* =====================================================
+   7. 下拉菜单
+===================================================== */
+
+.dropdown {
+    position: relative; /* 相对定位；视觉效果：提供参照；设计目的：下拉绝对定位 */
+    display: inline-block; /* 横向排列；视觉效果：可横向布局；设计目的：导航使用 */
+}
+
+.dropdown-content {
+    display: none; /* 默认隐藏；视觉效果：菜单不显示；设计目的：交互触发 */
+    position: absolute; /* 绝对定位；视觉效果：浮在父元素下方；设计目的：下拉显示 */
+    background-color: #f9f9f9; /* 背景色；视觉效果：干净；设计目的：突出菜单项 */
+    min-width: 160px; /* 最小宽度；视觉效果：内容完整；设计目的：可点击区域 */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* 阴影；视觉效果：浮起感；设计目的：层次分明 */
+    z-index: 1; /* 层级；视觉效果：在内容上方；设计目的：保证可点击 */
+    top: 100%; /* 紧贴父元素底部；视觉效果：自然下拉；设计目的：布局合理 */
+    left: 0; /* 左对齐；视觉效果：整齐；设计目的：视觉统一 */
+}
+
+.dropdown-content a {
+    color: black; /* 字体颜色；视觉效果：清晰可读；设计目的：可点击 */
+    padding: 12px 16px; /* 内边距；视觉效果：点击舒适；设计目的：可操作 */
+    text-decoration: none; /* 去下划线；视觉效果：简洁；设计目的：统一风格 */
+    display: block; /* 块级元素；视觉效果：整行可点击；设计目的：提高交互 */
+    text-align: left; /* 左对齐；视觉效果：整齐；设计目的：美观 */
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd; /* 悬停背景；视觉效果：高亮提示；设计目的：交互反馈 */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* 悬停显示；视觉效果：下拉出现；设计目的：交互触发 */
+}
+
+.dropdown:hover > a {
+    background-color: #555; /* 悬停背景；视觉效果：高亮；设计目的：交互提示 */
+    color: white; /* 字体颜色；视觉效果：对比明显；设计目的：可读 */
+}
+
+/* =====================================================
+   8. 文章列表 & 编辑器
+===================================================== */
+.upload-section{
+  margin-top:30px; /* 上外边距；视觉效果：与上方内容拉开距离；设计目的：版块分区清晰 */
+  padding-bottom:50px; /* 下内边距；视觉效果：底部留白；设计目的：滚动和视觉呼吸感 */
+}
+
+.post-editor-card{
+  background:var(--card); /* 背景色（主题变量）；视觉效果：随深浅色切换；设计目的：统一主题系统 */
+  color:var(--text); /* 文字颜色（主题变量）；视觉效果：始终清晰可读；设计目的：主题一致性 */
+  border-radius:15px; /* 圆角；视觉效果：柔和卡片；设计目的：弱化边界、提升质感 */
+  padding:25px; /* 内边距；视觉效果：内容不拥挤；设计目的：提升可读性 */
+  box-shadow:0 10px 30px rgba(0,0,0,0.08); /* 阴影；视觉效果：卡片悬浮感；设计目的：增强层级关系 */
+  margin-bottom:30px; /* 下外边距；视觉效果：卡片之间分隔；设计目的：布局清晰 */
+}
+
+.post-editor-card h3{
+  margin-top:0; /* 去除默认上边距；视觉效果：标题紧贴卡片顶部；设计目的：视觉对齐 */
+  color:var(--text); /* 标题颜色（主题变量）；视觉效果：高对比清晰；设计目的：主题一致 */
+}
+
+.post-editor-card input,
+.post-editor-card textarea{
+  width:100%; /* 宽度占满父容器；视觉效果：输入区域宽敞；设计目的：提升输入体验 */
+  border:1px solid var(--border); /* 边框颜色（主题变量）；视觉效果：柔和分隔；设计目的：区分输入区域 */
+  background:var(--input-bg); /* 输入框背景（主题变量）；视觉效果：适配深浅色；设计目的：主题统一 */
+  color:var(--text); /* 输入文字颜色（主题变量）；视觉效果：始终可读；设计目的：无障碍体验 */
+  border-radius:var(--input-radius); /* 圆角；视觉效果：柔和表单风格；设计目的：组件统一 */
+  padding:12px; /* 内边距；视觉效果：输入舒适；设计目的：可读性与易用性 */
+  margin-top:10px; /* 上外边距；视觉效果：与上方元素分离；设计目的：布局清晰 */
+  outline:none; /* 去除默认聚焦轮廓；视觉效果：更简洁；设计目的：统一视觉风格 */
+  transition:border 0.3s; /* 边框过渡动画；视觉效果：状态变化平滑；设计目的：增强交互反馈 */
+}
+
+.post-editor-card input:focus,
+.post-editor-card textarea:focus{
+  border-color:var(--focus-color); /* 聚焦边框色；视觉效果：当前输入项高亮；设计目的：明确焦点位置 */
+}
+
+.blog-post{
+  background:var(--card); /* 文章背景（主题变量）；视觉效果：卡片化显示；设计目的：内容承载区域 */
+  color:var(--text); /* 文章文字颜色（主题变量）；视觉效果：清晰易读；设计目的：主题一致 */
+  padding:20px; /* 内边距；视觉效果：内容舒展；设计目的：提高阅读体验 */
+  border-radius:var(--card-radius); /* 圆角；视觉效果：柔和卡片；设计目的：整体风格统一 */
+  margin-bottom:20px; /* 下外边距；视觉效果：文章分隔；设计目的：列表层次清晰 */
+  animation:fadeIn 0.5s ease; /* 渐显动画；视觉效果：内容自然出现；设计目的：增强界面动效 */
+  border-left:6px solid var(--focus-color); /* 左侧强调线；视觉效果：视觉锚点；设计目的：突出文章内容 */
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); } /* 初始状态；视觉效果：轻微下移透明；设计目的：动画起点 */
+  to { opacity: 1; transform: translateY(0); } /* 结束状态；视觉效果：自然出现；设计目的：动画终点 */
+}

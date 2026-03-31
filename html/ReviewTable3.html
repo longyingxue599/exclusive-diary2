@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript 属性快速复习表</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+:root {
+    --header-height: 60px;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    /* 核心修改：原有 20px 边距 + 60px 导航高度 = 80px */
+    padding: calc(var(--header-height) + 20px) 20px 20px 20px;
+}
+h1 { text-align: center; color: #333; margin-bottom: 20px; }
+h2 {
+    margin-top: 40px;
+    color: #4A90E2;
+    border-bottom: 2px solid #4A90E2;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: top;
+}
+th { background-color: #eee; }
+tr:nth-child(even) { background-color: #fafafa; }
+.symbol { font-weight: bold; text-align: center; }
+.variable { background-color: #e0f7fa; }
+.array { background-color: #fff3e0; }
+.object { background-color: #e8f5e9; }
+.function { background-color: #f3e5f5; }
+.dom { background-color: #fff9c4; }
+.event { background-color: #ffe0b2; }
+.timer { background-color: #c8e6c9; }
+@media print {
+    body { padding: 0; }
+    table { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+                <header class="site-header">
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="../interface.html">首页</a></li>
+                            <li><a href="../projects.html">学习笔记展示</a></li>
+                            <li><a href="../experience.html">经验</a></li>
+                            <!-- 添加一个类以便样式控制 -->
+                            <li class="dropdown"><a href="#">联系▼</a>
+                                <div class="dropdown-content"> 
+                                    <a href="#">基本信息</a>
+                                    <a href="../contact.html">咨询服务</a>
+                                    <a href="#">技术支持</a>
+                                    <a href="../index.html">退出登录</a>
+                                </div>
+                            </li>
+                            &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </ul>
+                    </nav>
+                </header>
+<main class="main-content-container">
+<h1>JavaScript 快速复习表（A4打印版）</h1>
+<p>每个属性/方法包含：作用 / 核心功能 / 视觉效果提示 / 设计目的。符号辅助联想记忆。</p>
+
+<!-- 变量 Variable -->
+<h2>变量 Variable</h2>
+<table>
+<tr class="variable"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="variable"><td class="symbol">📦</td><td>var</td><td>声明变量（函数作用域）</td><td>无直接视觉效果</td><td>存储可变化的值</td></tr>
+<tr class="variable"><td class="symbol">📦</td><td>let</td><td>声明块作用域变量</td><td>无直接视觉效果</td><td>安全管理变量，避免作用域污染</td></tr>
+<tr class="variable"><td class="symbol">📦</td><td>const</td><td>声明常量</td><td>无直接视觉效果</td><td>保证值不可修改，提高代码可靠性</td></tr>
+
+<!-- 数组 Array -->
+<h2>数组 Array</h2>
+<table>
+<tr class="array"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="array"><td class="symbol">📝</td><td>push()</td><td>在数组末尾添加元素</td><td>数组长度增加</td><td>动态添加数据</td></tr>
+<tr class="array"><td class="symbol">📝</td><td>pop()</td><td>删除数组末尾元素</td><td>数组长度减少</td><td>移除最后数据</td></tr>
+<tr class="array"><td class="symbol">📝</td><td>shift()</td><td>删除数组开头元素</td><td>数组前部改变</td><td>FIFO 操作 / 队列</td></tr>
+<tr class="array"><td class="symbol">📝</td><td>unshift()</td><td>在数组开头添加元素</td><td>数组前部增加</td><td>队列添加 / 重新排序</td></tr>
+<tr class="array"><td class="symbol">🔍</td><td>indexOf()</td><td>返回元素索引</td><td>无直接视觉效果</td><td>查找元素位置</td></tr>
+<tr class="array"><td class="symbol">🔄</td><td>forEach()</td><td>遍历数组元素</td><td>可执行回调操作</td><td>处理每个元素 / 批量操作</td></tr>
+<tr class="array"><td class="symbol">🎨</td><td>map()</td><td>生成新数组，元素由回调返回</td><td>可生成新数组显示</td><td>数据转换 / 渲染视图</td></tr>
+
+<!-- 对象 Object -->
+<h2>对象 Object</h2>
+<table>
+<tr class="object"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="object"><td class="symbol">🔑</td><td>key</td><td>对象键名</td><td>无视觉效果</td><td>标识对象属性</td></tr>
+<tr class="object"><td class="symbol">💎</td><td>value</td><td>对象键值</td><td>无视觉效果</td><td>存储对象数据</td></tr>
+<tr class="object"><td class="symbol">🔄</td><td>Object.keys()</td><td>获取对象所有键名</td><td>可遍历输出</td><td>快速获取属性列表</td></tr>
+<tr class="object"><td class="symbol">🔄</td><td>Object.values()</td><td>获取对象所有值</td><td>可遍历输出</td><td>快速获取数据</td></tr>
+<tr class="object"><td class="symbol">🔄</td><td>Object.entries()</td><td>获取键值对数组</td><td>可遍历输出</td><td>便于循环或解构</td></tr>
+
+<!-- 函数 Function -->
+<h2>函数 Function</h2>
+<table>
+<tr class="function"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="function"><td class="symbol">⚙️</td><td>function</td><td>声明函数</td><td>无视觉效果</td><td>封装可重复调用逻辑</td></tr>
+<tr class="function"><td class="symbol">⚙️</td><td>return</td><td>返回函数值</td><td>无直接视觉效果</td><td>输出结果 / 传递数据</td></tr>
+<tr class="function"><td class="symbol">🎯</td><td>arrow =></td><td>箭头函数简写</td><td>简洁视觉结构</td><td>减少冗余代码 / 保留 this</td></tr>
+
+<!-- DOM 操作 -->
+<h2>DOM 操作</h2>
+<table>
+<tr class="dom"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="dom"><td class="symbol">🔍</td><td>getElementById()</td><td>获取指定 id 元素</td><td>无视觉效果</td><td>快速定位 DOM 元素</td></tr>
+<tr class="dom"><td class="symbol">🔍</td><td>getElementsByClassName()</td><td>获取指定 class 元素集合</td><td>无视觉效果</td><td>批量操作元素</td></tr>
+<tr class="dom"><td class="symbol">✏️</td><td>innerHTML</td><td>设置/获取元素 HTML 内容</td><td>页面内容变化</td><td>动态更新页面内容</td></tr>
+<tr class="dom"><td class="symbol">✏️</td><td>textContent</td><td>设置/获取文本内容</td><td>文字变化</td><td>安全显示纯文本</td></tr>
+<tr class="dom"><td class="symbol">🎨</td><td>style</td><td>修改元素样式</td><td>颜色/大小/布局变化</td><td>动态美化和布局</td></tr>
+
+<!-- 事件 Event -->
+<h2>事件 Event</h2>
+<table>
+<tr class="event"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="event"><td class="symbol">🖱️</td><td>onclick</td><td>鼠标点击事件</td><td>用户点击触发行为</td><td>交互操作</td></tr>
+<tr class="event"><td class="symbol">🖱️</td><td>onmouseover</td><td>鼠标悬停事件</td><td>悬停触发效果</td><td>提示 / 动态交互</td></tr>
+<tr class="event"><td class="symbol">🖱️</td><td>onmouseout</td><td>鼠标移出事件</td><td>悬停效果消失</td><td>交互反馈</td></tr>
+<tr class="event"><td class="symbol">⌨️</td><td>onkeydown / onkeyup</td><td>键盘事件</td><td>输入触发行为</td><td>处理用户输入</td></tr>
+
+<!-- 定时器 Timer -->
+<h2>定时器 Timer</h2>
+<table>
+<tr class="timer"><th>符号</th><th>属性/方法</th><th>作用 / 核心功能</th><th>视觉效果提示</th><th>设计目的</th></tr>
+<tr class="timer"><td class="symbol">⏰</td><td>setTimeout()</td><td>延时执行函数</td><td>延迟结果出现</td><td>异步操作 / 动画延迟</td></tr>
+<tr class="timer"><td class="symbol">⏰</td><td>setInterval()</td><td>周期性执行函数</td><td>重复动作 / 动画循环</td><td>定时更新或轮播</td></tr>
+<tr class="timer"><td class="symbol">🛑</td><td>clearTimeout / clearInterval</td><td>取消定时器</td><td>停止延迟或循环</td><td>防止无限循环或取消操作</td></tr>
+</table>
+</main>
+<script src="../js/script.js"></script>
+</body>
+</html>

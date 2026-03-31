@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录到博客</title>
+    <link rel="stylesheet" href="../博客/css/style.css">
+</head>
+<body class="login-page">
+
+    <!-- 状态徽章（登录后显示用户名/登出） -->
+    <div id="loginStatus" class="login-status-badge">未登录 <button id="logoutBtn" class="logout-btn" style="display:none">登出</button>
+    </div>
+
+    <!-- 登录卡片（玻璃效果） -->
+    <div id="loginOverlay" class="login-overlay" aria-hidden="true">
+        <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <div class="login-left">
+                <div class="avatar-circle">
+                    <img src="assets/img/photo.png" alt="avatar" onerror="this.style.display='none'">
+                </div>
+                <div class="profile-name">龙龙龙</div>
+            </div>
+            <div class="login-right">
+                <h3 id="loginTitle" class="login-title">登录</h3>
+                <div class="login-sub">请输入用户名和密码以登录博客</div>
+                <form id="loginForm" class="login-form">
+                    <input id="loginUser" name="username" class="login-input" placeholder="用户名" autocomplete="username" required />
+                    <input id="loginPass" type="password" name="password" class="login-input" placeholder="密码" autocomplete="current-password" required />
+                    <div class="login-row-between">
+                        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="rememberMe"> 记住密码</label>
+                        <a href="#" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:13px">忘记密码</a>
+                    </div>
+                    <div id="loginError" class="login-error" aria-live="polite"></div>
+                    <button type="submit" class="login-btn-primary">立即登录</button>
+                    <a class="login-link" href="#">没有账号？立即注册</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 可选外部脚本 -->
+    <script src="../博客/js/script.js"></script>
+
+    <!-- 登录逻辑（前端示例：本地校验，示例凭证：admin/password） -->
+    <script>
+        (function(){
+            const DEMO_USER = 'admin';// 示例用户名,作用于演示登录功能
+            const DEMO_PASS = 'password';// 示例密码，作用于演示登录功能
+            const overlay = document.getElementById('loginOverlay');// 登录覆盖层，用于显示和隐藏登录框
+            const form = document.getElementById('loginForm');// 登录表单元素,用于提交登录请求
+            const err = document.getElementById('loginError');
+            const status = document.getElementById('loginStatus');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            function show(){ overlay.style.display='flex'; overlay.setAttribute('aria-hidden','false'); const u = document.getElementById('loginUser'); if(u) u.focus(); }
+            function hide(){ overlay.style.display='none'; overlay.setAttribute('aria-hidden','true'); }
+
+            async function tryRedirect(){
+                const targets = ['./interface.html','/interface.html','interface.html'];
+                for(const t of targets){
+                    try{ const res = await fetch(t, { method: 'HEAD' }); if(res && res.ok){ window.location.href = t; return true; } }
+                    catch(e){ /* 忽略 */ }
+                }
+                window.location.href = './interface.html';
+                return false;
+            }
+
+            function setLogged(name){ localStorage.setItem('blog_logged','1'); localStorage.setItem('blog_user',name); status.firstChild && (status.firstChild.textContent = '已登录：' + name + ' '); status.childNodes && (logoutBtn.style.display='inline-block'); }
+            function clearLogged(){ localStorage.removeItem('blog_logged'); localStorage.removeItem('blog_user'); status.textContent = '未登录'; logoutBtn.style.display='none'; }
+
+            window.addEventListener('load', ()=>{
+                if(localStorage.getItem('blog_logged')){
+                    const name = localStorage.getItem('blog_user') || '用户';
+                    setLogged(name);
+                    // 要求再次输入以便演示跳转
+                    show();
+                } else {
+                    show();
+                }
+            });
+
+            // 状态区域可点击打开登录框
+            status.style.cursor = 'pointer';
+            status.title = '点击切换登录/切换账号';
+            status.addEventListener('click', ()=>{ show(); });
+
+            form.addEventListener('submit', (e)=>{
+                e.preventDefault(); err.style.display='none';
+                const u = form.username.value.trim();
+                const p = form.password.value;
+                if(!u || !p){ err.textContent='请填写用户名和密码'; err.style.display='block'; return; }
+                if(u === DEMO_USER && p === DEMO_PASS){ setLogged(u); hide(); tryRedirect(); }
+                else{ err.textContent='用户名或密码错误（示例凭证：admin / password）'; err.style.display='block'; }
+            });
+
+            // 保护性绑定：如果按钮存在则绑定
+            if(logoutBtn){
+                logoutBtn.addEventListener('click', ()=>{ clearLogged(); show(); const u = document.getElementById('loginUser'); if(u) u.focus(); });
+            }
+        })();
+                    // 状态区域点击打开登录框
+            status.style.cursor = 'pointer';
+            status.title = '点击切换登录/切换账号';
+            status.addEventListener('click', (e) => {
+                if (e.target !== logoutBtn) show(); 
+            });
+
+            // 登出逻辑
+            logoutBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止冒泡，避免触发 status 的 click 事件
+                clearLogged();
+                show();
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                err.style.display = 'none';
+                const u = form.username.value.trim();
+                const p = form.password.value;
+                
+                if (!u || !p) {
+                    err.textContent = '请填写用户名和密码';
+                    err.style.display = 'block';
+                    return;
+                }
+                
+                // 演示账号校验
+                if (u === DEMO_USER && p === DEMO_PASS) {
+                    setLogged(u);
+                    hide();
+                    tryRedirect();
+                } else {
+                    err.textContent = '用户名或密码错误（示例：admin / password）';
+                    err.style.display = 'block';
+                }
+            });
+    </script>
+</body>
+</html>
